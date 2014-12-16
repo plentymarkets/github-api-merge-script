@@ -11,7 +11,7 @@ The script uses the [Github API V3](https://developer.github.com/v3/) via the [R
 gem install octokit
 ```
 
-## How to Use
+## Usage
 
 Execute the script via the `ruby` command:
 
@@ -29,4 +29,10 @@ The options are:
 | -m, --merge       | The source and destination branch (Pattern: FROM:TO), e.g. mybranch:master. Can be specified multiple times. The source can also be an SHA1 instead of a branch name.                                                                                                                                 | Yes      |
 | -M, --message     | The commit message that will be uses for the merge. There are two placeholders for you can use: `:frombranch:` and `:tobranch:`. Eveything has to be put in double quotes, e.g. `--message "Well, I\'m merging :frombranch: to :tobranch:"`. | No       |
 
+### Example
 
+I want to merge the branch `my_branch` to `master` and from there to the branch `release`. I have to specify an access token for my Github account (here `52b3e877684d663efb032a9f5fbde244525a460d`, changed for this example ;-) ) and a repository name (here `thorbenegberts/github-api-merge-script`). I also specify a custom commit message:
+
+```
+ruby merge.rb -a 52b3e877684d663efb032a9f5fbde244525a460d -r thorbenegberts/github-api-merge-script -m my_branch:master -m master:release -M "Merged branch ':frombranch:' to ':tobranch:'"
+```
