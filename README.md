@@ -3,7 +3,7 @@ Github API Merge Script
 
 A simple script that can be used to merge via the Github API.
 
-# Preparation
+## Preparation
 
 The script uses the [Github API V3](https://developer.github.com/v3/) via the [Ruby flavor of Octokit](https://github.com/octokit/octokit.rb). To be more specific, the [`merge`](http://octokit.github.io/octokit.rb/Octokit/Client/Commits.html#merge-instance_method) method is used.
 
@@ -11,7 +11,7 @@ The script uses the [Github API V3](https://developer.github.com/v3/) via the [R
 gem install octokit
 ```
 
-# How to Use
+## How to Use
 
 Execute the script via the `ruby` command:
 
