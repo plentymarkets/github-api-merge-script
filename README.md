@@ -34,5 +34,5 @@ The options are:
 I want to merge the branch `my_branch` to `master` and from there to the branch `release`. I have to specify an access token for my Github account (here `52b3e877684d663efb032a9f5fbde244525a460d`, changed for this example ;-) ) and a repository name (here `thorbenegberts/github-api-merge-script`). I also specify a custom commit message:
 
 ```
-ruby merge.rb -a 52b3e877684d663efb032a9f5fbde244525a460d -r thorbenegberts/github-api-merge-script -m my_branch:master -m master:release -M "Merged branch ':frombranch:' to ':tobranch:'"
+ruby merge.rb --accesstoken 52b3e877684d663efb032a9f5fbde244525a460d --repo thorbenegberts/github-api-merge-script --merge my_branch:master --merge master:release --message "Merged branch ':frombranch:' to ':tobranch:'"
 ```
