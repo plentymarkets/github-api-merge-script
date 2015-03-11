@@ -39,8 +39,7 @@ raise "Repository name is missing" unless options.repo.length > 0
 
 raise "You have to specify at least one branch name" unless options.branches.count > 0
 
-options.branches.each {
-    |branchArgString|
+options.branches.each do |branchArgString|
     
     # Splitting branch parameter from "FROM:TO" to an array
     branchArgArray = branchArgString.split(/:/)
@@ -73,4 +72,4 @@ options.branches.each {
       						branchTo,
       						branchFrom,
       						mergeOptions)
-}
+end
