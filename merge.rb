@@ -59,8 +59,7 @@ options.branches.each do |branchArgString|
 
     mergeOptions = {}
 
-    if
-        commitMessage.length > 0
+    unless commitMessage.empty?
         mergeOptions[:commit_message] = commitMessage
     end
 
