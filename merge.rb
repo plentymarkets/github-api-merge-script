@@ -78,5 +78,6 @@ options.branches.each do |branchArgString|
       puts "ERROR: MERGE CONFLICT '#{branchFrom}' => '#{branchTo}'"
       puts "The Oompa Loompas failed to merge '#{branchFrom}' to '#{branchTo}'. You need to resolve the conflicts first. Have a nice day!"
       puts "-----------------------------------"
+      raise e
     end
 end
