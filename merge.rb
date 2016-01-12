@@ -15,7 +15,7 @@ OptionParser.new do |opts|
   opts.banner = "Usage: merge.rb [options]"
   opts.separator ""
   opts.separator "Specific options:"
-  
+
   opts.on('-a', '--accesstoken ACCESSTOKEN', 'Your access token, e.g. \'52b3e877684d663efb032a9f5fbde244525a460d\'') { |v| options.accesstoken << v }
   opts.on('-r', '--repo REPOSITORY', 'The repository\'s name, e.g. thorbenegberts/github-api-merge-script') { |v| options.repo << v }
   opts.on('-m', '--merge FROM:TO', 'The source and destination branch (FROM:TO), e.g. mybranch:master. Can be specified multiple times.') { |v| options.branches << v }
@@ -40,21 +40,21 @@ raise "Repository name is missing" unless options.repo.length > 0
 raise "You have to specify at least one branch name" unless options.branches.count > 0
 
 options.branches.each do |branchArgString|
-    
+
     # Splitting branch parameter from "FROM:TO" to an array
     branchArgArray = branchArgString.split(/:/)
-    
+
     raise "Invalid argument for source and destination branch" unless branchArgArray.count == 2
-    
+
     branchFrom  = branchArgArray[0]
     branchTo    = branchArgArray[1]
 
     # Commit message
-    
+
     commitMessage = options.message
     commitMessage = commitMessage.sub(/:frombranch:/, branchFrom)
     commitMessage = commitMessage.sub(/:tobranch:/, branchTo)
-    
+
     # Define merge options
 
     mergeOptions = {}
@@ -64,11 +64,19 @@ options.branches.each do |branchArgString|
     end
 
     # Merge
-    
+
     puts "Merging branch '#{branchFrom}' to '#{branchTo}' ..."
-    
-		client.merge( options.repo,
-      						branchTo,
-      						branchFrom,
-      						mergeOptions)
+
+    begin
+  		client.merge( options.repo,
+        						branchTo,
+        						branchFrom,
+        						mergeOptions)
+    rescue Octokit::Conflict => e
+      puts e.message
+      puts "-----------------------------------"
+      puts "ERROR: MERGE CONFLICT '#{branchFrom}' => '#{branchTo}'"
+      puts "The Oompa Loompas failed to merge '#{branchFrom}' to '#{branchTo}'. You need to resolve the conflicts first. Have a nice day!"
+      puts "-----------------------------------"
+    end
 end
